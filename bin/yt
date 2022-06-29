@@ -1,0 +1,18 @@
+#!/bin/sh
+
+musicpath=$HOME/Music
+videopath=$HOME/Videos
+
+if [ $# -eq 0 ]; then 
+    echo "yt [mp3, mp4]" 
+fi
+
+case "$1" in
+mp3)
+    yt-dlp  -x -i --audio-format mp3 "$2" -4 -o $musicpath/'%(title)'s.'%(ext)'s$(cat /dev/urandom | tr -dc "[:alnum:]" | head -c4)
+;;
+
+mp4)
+    yt-dlp "$2" -i --format mp4 -4 -o $videopath/'%(title)'s.'%(ext)'s$(cat /dev/urandom | tr -dc "[:alnum:]" | head -c4)
+;;
+esac
